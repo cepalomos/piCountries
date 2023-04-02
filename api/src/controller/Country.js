@@ -29,7 +29,7 @@ async function getCountryId(req, res, next) {
   const id = req.params.id.toUpperCase();
   try {
     const country = await getId(id);
-    if (!country.dataValues.id) {
+    if (!country.id) {
       throw { status: 404, message: "No existe en la base de datos" }
     }
     response.success(req, res, country, 200);

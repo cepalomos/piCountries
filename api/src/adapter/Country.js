@@ -1,7 +1,8 @@
 const API_URL = "https://restcountries.com/v3/all"
 const axios = require('axios');
 const { Country, Activity } = require('../db');
-const { Op } = require('sequelize')
+const { Op } = require('sequelize');
+const {activitiesNormalize} = require('../utils');
 
 function getApi() {
   return axios(API_URL)
@@ -35,7 +36,7 @@ function getDB() {
     }]
   }).then((countries) => {
     return countries.reduce((normalize, country) => {
-      const activities = country.dataValues.activities.map(({ dataValues: name }) => ({ name }));
+      const activities = country.dataValues.activities.map(({ dataValues: {name} }) => ({ name }));
       return [...normalize, { ...country.dataValues, activities }];
     }, [])
   }).catch(error => {
@@ -52,10 +53,12 @@ function getId(id) {
       attributes: ['id', 'name', 'difficulty', 'duration', 'season']
     }]
   })
-    // .then(country=>{
-    //   let activity = country.dataValues.activities.map(({id,name,difficulty,duration,season})=>({id,name,difficulty,duration,season}))
-    //   return ({...country,activities:activity});
-    // })
+    .then(country=>{
+      return activitiesNormalize(country);
+      // let activity = country.dataValues.activities.map(({dataValues:{id,name,difficulty,duration,season}})=>({id,name,difficulty,duration,season}))
+      // let result = Object.assign({},country.dataValues,{activities:activity});
+      // return result;
+    })
     .catch(error => {
       console.log("[error getDB]", error);
       throw { status: 500, message: "Error en la base de datos" }
@@ -76,7 +79,9 @@ function getName(name) {
         attributes: ['id', 'name', 'difficulty', 'duration', 'season']
       }]
     })
-    .then(resolve)
+    .then((contries)=>{
+      resolve(contries.map(country=>activitiesNormalize(country)))
+    })
     .catch(reject)
   })
 }
