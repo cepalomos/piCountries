@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom'
 import '../css/Landing.css';
 
 function Landing() {
   return (
     <div className='contenedor_principal'>
-      <button>Entrar</button>
+      <Link to={"/home"}>
+      <button className='button'>Entrar</button>
+      </Link>
     </div>
   )
 }

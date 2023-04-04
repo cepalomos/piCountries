@@ -10,3 +10,13 @@
   background-size: cover;
   background-position: center;;
 }
+.button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  background-color: rgba(14,168,232,0.5); /* color con transparencia */
+  border: none; /* eliminar borde */
+  padding: 10px 25px;
+}

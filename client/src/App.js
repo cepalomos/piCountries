@@ -1,17 +1,16 @@
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from './Pages/Landing';
 import Home from './Pages/Home'
 import Detail from './Pages/Detail';
 import Form from './Pages/Form';
 import Error from './Pages/Error';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 function App() {
   return (
+<Provider store={store}>
     <Router>
       <div className="App">
         <Switch>
@@ -28,11 +27,12 @@ function App() {
             <Form />
           </Route>
           <Route path={"*"}>
-            <Error/>
+            <Error />
           </Route>
         </Switch>
       </div>
     </Router>
+</Provider>
   );
 }
 
