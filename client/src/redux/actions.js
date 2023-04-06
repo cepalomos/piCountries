@@ -76,20 +76,20 @@ function countryActiviti(data) {
   }
 }
 
-function getActiviti() {
-  return (dispatch) => {
-    fetch("http://localhost:3001/activities")
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) 
-        throw new Error(res.message);
-        else
-        dispatch(countryActiviti(res.body))
-      }
-      )
-      .catch(error=>console.error(error));
-  }
-}
+// function getActiviti() {
+//   return (dispatch) => {
+//     fetch("http://localhost:3001/activities")
+//       .then(res => res.json())
+//       .then(res => {
+//         if (res.error) 
+//         throw new Error(res.message);
+//         else
+//         dispatch(countryActiviti(res.body))
+//       }
+//       )
+//       .catch(error=>console.error(error));
+//   }
+// }
 
 function countryFilterActivities(payload){
   return {
@@ -128,4 +128,4 @@ const countryOrder = (option) => {
   };
 };
 
-export { countryApi, countryPagination, countryContinents, countryFilterContinents, getActiviti,countryFilterActivities, countryOrder}
+export { countryApi, countryPagination, countryContinents, countryFilterContinents, countryActiviti,countryFilterActivities, countryOrder}

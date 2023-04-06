@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "./SearchBar";
 import { useEffect } from "react";
-import { countryContinents, countryFilterContinents, countryPagination, getActiviti, countryFilterActivities, countryApi,countryOrder } from "../redux/actions";
+import { countryContinents, countryFilterContinents, countryPagination, countryActiviti, countryFilterActivities, countryApi,countryOrder } from "../redux/actions";
 import Select from "./Select";
 
 export default function NavBar() {
@@ -9,7 +9,7 @@ export default function NavBar() {
   const { continents, countriesApi, activities } = useSelector(store => store);
   useEffect(() => {
     dispatch(countryContinents());
-    dispatch(getActiviti());
+    dispatch(countryActiviti());
   }, [countriesApi, dispatch]);
 
   function handlerFilterContinents(event) {

@@ -62,7 +62,15 @@ function reducer(state = initialState, action) {
     case COUNTRY_ACTIVITIES:
       return {
         ...state,
-        activities: payload ?? []
+        activities: state.countriesApi.reduce((activiti,{activities:element})=>{
+          for(const act of element){
+            if(!activiti[act.id]){
+              activiti[act.id] = true;
+              activiti.activities.push(act)
+            }
+          }
+          return activiti
+        },{activities:[]}).activities
       }
     case COUNTRY_FILTER_ACT:
       return {
