@@ -10,7 +10,7 @@ export default function Select({ options, functionDispatch,nameSelector = "prueb
   ))
   return (
     <>
-      <select name="prueba" onChange={functionDispatch}>
+      <select name={nameSelector} onChange={functionDispatch}>
         <option key={0} value={"reset"}>{`--${nameSelector}--`}</option>
         {selectors}
       </select>

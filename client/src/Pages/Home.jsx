@@ -20,7 +20,7 @@ function Home() {
       {error && <Error detalil={errorDetail}/>}
       {loading && !error && (<Loading/>)}
       {!loading && !error && countries.length && (<Cards countries={countries}/>)}
-      {!error && <Pagination pageNow={pageNow} arrayLength={countriesApi.length} maxPages={numberPages}/>}
+      {!error && !loading && <Pagination pageNow={pageNow} arrayLength={countriesApi.length} maxPages={numberPages}/>}
     </>
   )
 }

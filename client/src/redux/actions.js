@@ -1,4 +1,4 @@
-import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT } from './actionTypes';
+import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT,COUNTRY_ORDER_ASC,COUNTRY_ORDER_DES,COUNTRY_ORDER_PASC,COUNTRY_ORDER_PDES } from './actionTypes';
 
 function countryRequest() {
   return { type: COUNTRY_REQUEST }
@@ -98,4 +98,34 @@ function countryFilterActivities(payload){
   }
 }
 
-export { countryApi, countryPagination, countryContinents, countryFilterContinents, getActiviti,countryFilterActivities }
+const countryPasc = () => {
+  return { type: COUNTRY_ORDER_PASC };
+};
+const countryAsc = () => {
+  return { type: COUNTRY_ORDER_ASC };
+};
+const countryDes = () => {
+  return { type: COUNTRY_ORDER_DES };
+};
+const countryPdes = () => {
+  return { type: COUNTRY_ORDER_PDES };
+};
+
+const countryOrder = (option) => {
+  return (dispatch) => {
+    switch (option) {
+      case "ASC":
+        return dispatch(countryAsc());
+      case "PASC":
+        return dispatch(countryPasc());
+      case "PDES":
+        return dispatch(countryPdes());
+      case "DES":
+        return dispatch(countryDes());
+      default:
+        dispatch(countryAsc());
+    }
+  };
+};
+
+export { countryApi, countryPagination, countryContinents, countryFilterContinents, getActiviti,countryFilterActivities, countryOrder}
