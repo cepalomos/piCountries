@@ -30,13 +30,13 @@ function createCountries(contriesArray) {
 
 function getDB() {
   return Country.findAll({
-    attributes: ['id', 'name', 'flag', 'continents'],
+    attributes: ['id', 'name', 'flag', 'continents','population'],
     include: [{
       model: Activity
     }]
   }).then((countries) => {
     return countries.reduce((normalize, country) => {
-      const activities = country.dataValues.activities.map(({ dataValues: {name} }) => ({ name }));
+      const activities = country.dataValues.activities.map(({ dataValues: {id,name} }) => ({ id,name }));
       return [...normalize, { ...country.dataValues, activities }];
     }, [])
   }).catch(error => {
@@ -70,7 +70,7 @@ function getName(name) {
     Country.findAll({
       where: {
         name: {
-          [Op.like]: `%${name}%`
+          [Op.iLike]: `%${name}%`
         }
       },
       attributes: ['id', 'name', 'flag', 'continents', 'capital', 'subregion', 'area', 'population'],
@@ -80,6 +80,7 @@ function getName(name) {
       }]
     })
     .then((contries)=>{
+      if(!contries.length) throw {status:404,message:"No hay coincidencias"}
       resolve(contries.map(country=>activitiesNormalize(country)))
     })
     .catch(reject)

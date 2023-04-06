@@ -7,7 +7,8 @@ async function getCountrys(req, res, next) {
   try {
     if (name) {
       const data = await getName(name);
-      if (!data) {
+      console.log(data);
+      if (!data ) {
         throw { status: 404, message: 'No se encontro nada en la base de datos' }
       }
       response.success(req, res, data, 200)

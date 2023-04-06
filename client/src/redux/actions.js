@@ -1,44 +1,45 @@
-import {COUNTRY_REQUEST,COUNTRY_SUCCESS,COUNTRY_FAILURE,COUNTRY_PAGINATION} from './actionTypes';
+import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT } from './actionTypes';
 
-function countryRequest(){
-  return { type:COUNTRY_REQUEST}
+function countryRequest() {
+  return { type: COUNTRY_REQUEST }
 };
 
-function countrySuccess(payload){
+function countrySuccess(payload) {
   return {
-    type:COUNTRY_SUCCESS,
+    type: COUNTRY_SUCCESS,
     payload
   }
 }
 
-function countryFailure(payload){
+function countryFailure(payload) {
   return {
-    type:COUNTRY_FAILURE,
+    type: COUNTRY_FAILURE,
     payload
   }
 }
 
-function countryApi(){
+function countryApi(url) {
   return (dispatch) => {
     dispatch(countryRequest());
-    fetch("http://localhost:3001/countries").then(res=>res.json())
-    .then(res=>{
-      if(!res.error){
-      dispatch(countrySuccess(res.body));
-      dispatch(countryPagination(res.body.length,1))}
-      else
-      throw res;
-    })
-    .catch(error=>{
-      dispatch(countryFailure(error))
-    })
+    fetch(url).then(res => res.json())
+      .then(res => {
+        if (!res.error) {
+          dispatch(countrySuccess(res.body));
+          dispatch(countryPagination(res.body.length, 1))
+        }
+        else
+          throw res;
+      })
+      .catch(error => {
+        dispatch(countryFailure(error))
+      })
   }
 }
 
-function country_page( star, end, pageNow){
+function countryPage(star, end, pageNow, numberPages) {
   return {
     type: COUNTRY_PAGINATION,
-    payload: { star, end, pageNow },
+    payload: { star, end, pageNow, numberPages },
   };
 };
 
@@ -48,11 +49,53 @@ function countryPagination(arraylength, pageNow) {
     if (pageNow <= numberPages) {
       let star = (pageNow - 1) * 10;
       let end = star + 10;
-      dispatch(country_page(star, end, pageNow));
+      dispatch(countryPage(star, end, pageNow, numberPages));
     } else if (numberPages === 0) {
-      dispatch(countryFailure({error:true,body:"No hay informacion"}));
+      dispatch(countryFailure({ error: true, body: "No hay informacion" }));
     }
   };
 };
 
-export {countryApi,countryPagination}
+function countryContinents() {
+  return {
+    type: COUNTRY_CONTINENTS
+  }
+}
+
+function countryFilterContinents(continent) {
+  return {
+    type: COUNTRY_FILTER_CON,
+    payload: continent
+  }
+}
+
+function countryActiviti(data) {
+  return {
+    type: COUNTRY_ACTIVITIES,
+    payload: data
+  }
+}
+
+function getActiviti() {
+  return (dispatch) => {
+    fetch("http://localhost:3001/activities")
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) 
+        throw new Error(res.message);
+        else
+        dispatch(countryActiviti(res.body))
+      }
+      )
+      .catch(error=>console.error(error));
+  }
+}
+
+function countryFilterActivities(payload){
+  return {
+    type: COUNTRY_FILTER_ACT,
+    payload
+  }
+}
+
+export { countryApi, countryPagination, countryContinents, countryFilterContinents, getActiviti,countryFilterActivities }
