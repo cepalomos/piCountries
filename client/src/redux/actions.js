@@ -1,4 +1,4 @@
-import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT, COUNTRY_ORDER_ASC, COUNTRY_ORDER_DES, COUNTRY_ORDER_PASC, COUNTRY_ORDER_PDES, COUNTRY_SEASON, COUNTRY_CREATE, COUNTRY_CREATE_RESET } from './actionTypes';
+import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT, COUNTRY_ORDER_ASC, COUNTRY_ORDER_DES, COUNTRY_ORDER_PASC, COUNTRY_ORDER_PDES, COUNTRY_SEASON, COUNTRY_CREATE, COUNTRY_CREATE_RESET, COUNTRY_DETAIL } from './actionTypes';
 
 function countryRequest() {
   return { type: COUNTRY_REQUEST }
@@ -189,4 +189,29 @@ function countryCreateReset(){
   }
 }
 
-export { countryApi, countryPagination, countryContinents, countryFilterContinents, countryActiviti, countryFilterActivities, countryOrder, getSeason, postActivity, countryCreateReset}
+function countryDetail(payload){
+  return {
+    type:COUNTRY_DETAIL,
+    payload
+  }
+}
+
+function getCountryDetail(id){
+  return function(dispatch){
+    fetch(`http://localhost:3001/countries/${id}`)
+    .then(res=>res.json())
+    .then(res=>{
+      if(res.error){
+        throw new Error(res.body)
+      }else{
+        dispatch(countryDetail(res.body));
+      }
+    })
+    .catch(error=>{
+      console.error(error);
+      dispatch(countryFailure(error))
+    })
+  }
+}
+
+export { countryApi, countryPagination, countryContinents, countryFilterContinents, countryActiviti, countryFilterActivities, countryOrder, getSeason, postActivity, countryCreateReset, getCountryDetail}

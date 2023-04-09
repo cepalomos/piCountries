@@ -1,4 +1,4 @@
-import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT, COUNTRY_ORDER_ASC, COUNTRY_ORDER_DES, COUNTRY_ORDER_PASC, COUNTRY_ORDER_PDES, COUNTRY_SEASON, COUNTRY_CREATE, COUNTRY_CREATE_RESET } from './actionTypes';
+import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT, COUNTRY_ORDER_ASC, COUNTRY_ORDER_DES, COUNTRY_ORDER_PASC, COUNTRY_ORDER_PDES, COUNTRY_SEASON, COUNTRY_CREATE, COUNTRY_CREATE_RESET, COUNTRY_DETAIL } from './actionTypes';
 
 const initialState = {
   countries: [],
@@ -13,7 +13,8 @@ const initialState = {
   season: [{id:1,name:"No hay informacion"}],
   create:false,
   countryPost:{},
-  presentation:false
+  presentation:false,
+  country:{}
 }
 
 function reducer(state = initialState, action) {
@@ -119,6 +120,11 @@ function reducer(state = initialState, action) {
         create:false,
         countryPost:[],
         presentation:false
+      }
+    case COUNTRY_DETAIL:
+      return{
+        ...state,
+        country:payload
       }
     default:
       return { ...state }
