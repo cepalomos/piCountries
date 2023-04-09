@@ -1,4 +1,4 @@
-import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT,COUNTRY_ORDER_ASC,COUNTRY_ORDER_DES,COUNTRY_ORDER_PASC,COUNTRY_ORDER_PDES } from './actionTypes';
+import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT, COUNTRY_ORDER_ASC, COUNTRY_ORDER_DES, COUNTRY_ORDER_PASC, COUNTRY_ORDER_PDES, COUNTRY_SEASON, COUNTRY_CREATE, COUNTRY_CREATE_RESET } from './actionTypes';
 
 function countryRequest() {
   return { type: COUNTRY_REQUEST }
@@ -91,7 +91,7 @@ function countryActiviti(data) {
 //   }
 // }
 
-function countryFilterActivities(payload){
+function countryFilterActivities(payload) {
   return {
     type: COUNTRY_FILTER_ACT,
     payload
@@ -128,4 +128,65 @@ const countryOrder = (option) => {
   };
 };
 
-export { countryApi, countryPagination, countryContinents, countryFilterContinents, countryActiviti,countryFilterActivities, countryOrder}
+function countrySeason(payload) {
+  return {
+    type: COUNTRY_SEASON,
+    payload
+  }
+}
+
+function getSeason() {
+  return function (dispatch) {
+    fetch('http://localhost:3001/activities/season')
+      .then(res => res.json())
+      .then(res => {
+        const aux = res.body.map(season => ({ id: season, name: season }))
+        dispatch(countrySeason(aux));
+      })
+      .then(() => {dispatch(countryApi("http://localhost:3001/countries"))})
+      .catch(error => console.error(error));
+  }
+}
+
+function countryCreate(payload){
+  return {
+    type:COUNTRY_CREATE,
+    payload
+  }
+}
+
+function postActivity(data){
+  return function(dispatch){
+    fetch("http://localhost:3001/activities",{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res=>res.json())
+    .then(res=>{
+      if(res.error){
+        throw new Error("Error al crear la actividad")
+      }else{
+        if(res.body.id){
+          dispatch(countryCreate({create:true,countryDb:res.body}))
+        }else{
+          dispatch(countryCreate({create:false,countryDb:res.body}))
+        }
+      }
+    })
+    .catch(error=>{
+      console.error(error);
+      dispatch(countryFailure([{status:500,message:error.message??"Error desconocido"}]))
+    })
+  }
+}
+
+function countryCreateReset(){
+  return {
+    type:COUNTRY_CREATE_RESET,
+  }
+}
+
+export { countryApi, countryPagination, countryContinents, countryFilterContinents, countryActiviti, countryFilterActivities, countryOrder, getSeason, postActivity, countryCreateReset}

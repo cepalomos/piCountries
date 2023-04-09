@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "./SearchBar";
 import { useEffect } from "react";
-import { countryContinents, countryFilterContinents, countryPagination, countryActiviti, countryFilterActivities, countryApi,countryOrder } from "../redux/actions";
+import { countryContinents, countryFilterContinents, countryPagination, countryActiviti, countryFilterActivities, countryApi, countryOrder } from "../redux/actions";
 import Select from "./Select";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ export default function NavBar() {
   return (
     <div>
       <SearchBar />
+      <Link to={"/create"}><button>Crear</button></Link>
       <fieldset>
         <legend>Filtrar por continentes o actividades</legend>
         {continents.length ?

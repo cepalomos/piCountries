@@ -1,4 +1,4 @@
-import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT, COUNTRY_ORDER_ASC, COUNTRY_ORDER_DES, COUNTRY_ORDER_PASC, COUNTRY_ORDER_PDES } from './actionTypes';
+import { COUNTRY_REQUEST, COUNTRY_SUCCESS, COUNTRY_FAILURE, COUNTRY_PAGINATION, COUNTRY_CONTINENTS, COUNTRY_FILTER_CON, COUNTRY_ACTIVITIES, COUNTRY_FILTER_ACT, COUNTRY_ORDER_ASC, COUNTRY_ORDER_DES, COUNTRY_ORDER_PASC, COUNTRY_ORDER_PDES, COUNTRY_SEASON, COUNTRY_CREATE, COUNTRY_CREATE_RESET } from './actionTypes';
 
 const initialState = {
   countries: [],
@@ -9,7 +9,11 @@ const initialState = {
   pageNow: 1,
   numberPages: 1,
   continents: [],
-  activities: []
+  activities: [],
+  season: [{id:1,name:"No hay informacion"}],
+  create:false,
+  countryPost:{},
+  presentation:false
 }
 
 function reducer(state = initialState, action) {
@@ -62,15 +66,15 @@ function reducer(state = initialState, action) {
     case COUNTRY_ACTIVITIES:
       return {
         ...state,
-        activities: state.countriesApi.reduce((activiti,{activities:element})=>{
-          for(const act of element){
-            if(!activiti[act.id]){
+        activities: state.countriesApi.reduce((activiti, { activities: element }) => {
+          for (const act of element) {
+            if (!activiti[act.id]) {
               activiti[act.id] = true;
               activiti.activities.push(act)
             }
           }
           return activiti
-        },{activities:[]}).activities
+        }, { activities: [] }).activities
       }
     case COUNTRY_FILTER_ACT:
       return {
@@ -96,6 +100,25 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         countriesApi: [...state.countriesApi.sort(({ population: a }, { population: b }) => b - a)]
+      }
+    case COUNTRY_SEASON:
+      return {
+        ...state,
+        season: payload
+      }
+    case COUNTRY_CREATE:
+      return {
+        ...state,
+        create:payload.create,
+        countryPost:payload.countryDb,
+        presentation:true
+      }
+    case COUNTRY_CREATE_RESET:
+      return{
+        ...state,
+        create:false,
+        countryPost:[],
+        presentation:false
       }
     default:
       return { ...state }

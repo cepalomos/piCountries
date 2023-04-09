@@ -1,5 +1,5 @@
 const response = require('../network/Response');
-const {getActivities,postActivityDb} = require('../adapter/Activity');
+const {getActivities,postActivityDb, getSeasonDb} = require('../adapter/Activity');
 
 async function getActiviti(req,res,next){
   try {
@@ -27,7 +27,17 @@ async function postActivity(req,res,next){
   }
 }
 
+async function getSeason(req,res,next){
+  try {
+    const season = await getSeasonDb();
+    response.success(req,res,season,200);
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   getActiviti,
-  postActivity
+  postActivity,
+  getSeason,
 }

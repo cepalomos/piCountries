@@ -1,10 +1,10 @@
+import '../css/Card.css';
 
 export default function Card({flag,name,continents}){
   return(
-    <div className="principal_card">
-      <h1>{name}</h1>
-      <img alt={name} src={flag}/>
-      <h2>{continents}</h2>
+    <div className="principal_card" style={{backgroundImage: `url(${flag})`}}>
+      <h1 className='card_title'>{name}</h1>
+      <h2 className='card_subtitle'>{continents}</h2>
     </div>
   )
 }

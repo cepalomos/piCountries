@@ -24,10 +24,18 @@ function postActivityDb(data){
   }).then(([activityDb,create])=>{
     activityDb.addCountry(countries);
     return [activityDb,create];
+  }).catch(error=>{
+    console.error(error);
+    throw {status:500,message:'Error al crear'};
   })
+}
+
+function getSeasonDb(){
+  return (Activity.rawAttributes.season.values)
 }
 
 module.exports = {
   getActivities,
-  postActivityDb
+  postActivityDb,
+  getSeasonDb,
 }
