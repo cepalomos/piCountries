@@ -1,5 +1,6 @@
 import Card from "./Card";
 import { Link } from 'react-router-dom'
+import '../css/Cards.css';
 
 export default function Cards({countries}) {
   const li = countries.map(({ id, name, flag, continents }) => (
@@ -10,7 +11,7 @@ export default function Cards({countries}) {
     </li>
   ));
   return (
-    <ul>
+    <ul className="cards-list">
       {li}
     </ul>
   )

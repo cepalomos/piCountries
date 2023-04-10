@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { countryContinents, countryFilterContinents, countryPagination, countryActiviti, countryFilterActivities, countryApi, countryOrder } from "../redux/actions";
 import Select from "./Select";
 import { Link } from "react-router-dom";
+import '../css/NavBar.css';
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -54,10 +55,12 @@ export default function NavBar() {
     }
   }
   return (
-    <div>
+    <div className="navbar-principal">
+      <fieldset className="navbar-filset">
       <SearchBar />
-      <Link to={"/create"}><button>Crear</button></Link>
-      <fieldset>
+      <Link to={"/create"}><button id="especial-button">Crear Actividad</button></Link>
+      </fieldset>
+      <fieldset className="navbar-filset">
         <legend>Filtrar por continentes o actividades</legend>
         {continents.length ?
           <Select options={continents} functionDispatch={handlerFilterContinents} nameSelector="Continentes" /> :
@@ -68,8 +71,8 @@ export default function NavBar() {
           <Select options={activities} functionDispatch={handlerFilterActiviti} nameSelector="Actividades" /> :
           <Select options={[{ id: 1, name: "No hay actividades" }]} functionDispatch={handlerFilterContinents} nameSelector="No hay actividades" />
         }
-      </fieldset>
-      <fieldset>
+      </fieldset >
+      <fieldset className="navbar-filset">
         <legend>Ordenamiento por nombre o poblacion</legend>
         <Select options={[{ id: 'ASC', name: "Ascendente" }, { id: "DES", name: "Descendente" }]} functionDispatch={handlerOrderName} nameSelector="Nombre del pais" />
         <Select options={[{ id: "PASC", name: "Ascendente" }, { id: "PDES", name: "Descendente" }]} functionDispatch={handlerOrderPopulation} nameSelector="Cantidad de poblacion" />

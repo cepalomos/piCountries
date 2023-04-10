@@ -1,5 +1,6 @@
-import { useDispatch } from "react-redux"
+import { useDispatch } from "react-redux";
 import { countryPagination } from "../redux/actions";
+import '../css/Pagination.css';
 
 export default function Pagination({pageNow,arrayLength,maxPages}){
   const dispatch = useDispatch();
@@ -18,10 +19,10 @@ export default function Pagination({pageNow,arrayLength,maxPages}){
     }
   }
   return(
-    <>
-      <button className="pagination_button" onClick={handlerBack}>atras</button>
-      <div>{`${pageNow}/${maxPages}`}</div>
-      <button className="pagination_button" onClick={handlerFollow}>delante</button>
-    </>
+    <div className="pagination-contenedor">
+      <button className="pagination_button" onClick={handlerBack}>Atras</button>
+      <div className="pagination-information">{`${pageNow}/${maxPages}`}</div>
+      <button className="pagination_button" onClick={handlerFollow}>Adelante</button>
+    </div>
   )
 }

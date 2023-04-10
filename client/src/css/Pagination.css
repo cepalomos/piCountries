@@ -1,0 +1,21 @@
+.pagination-contenedor{
+  display: grid;
+  grid-template-columns: 100px min-content 100px;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  margin: 20px;
+}
+.pagination_button{
+  margin: 10px;
+}
+.pagination-information{
+  text-align: center;
+  padding: 15px;
+  background-color: #33444b67;
+  border: 6px solid #33444b;
+  border-radius: 10px 0px;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+}

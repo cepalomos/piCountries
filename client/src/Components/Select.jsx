@@ -1,3 +1,4 @@
+import '../css/Select.css';
 
 export default function Select({ options, functionDispatch,nameSelector = "prueba" }) {
   const selectors = options.map(element => (
