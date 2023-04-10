@@ -6,6 +6,7 @@ import Select from '../Components/Select';
 import ListCountries from '../Components/ListCountries';
 import { Link } from 'react-router-dom'
 import Creado from '../Components/Creado';
+import '../css/Form.css';
 
 function Form() {
   const dispatch = useDispatch();
@@ -107,16 +108,23 @@ function Form() {
     <>
       {presentation ? <>
         <Creado create={create} data={countryPost} />
-        <button onClick={creationOtherActivity}>Crear Otra Actividad</button>
-        <Link to={'/home'}><button>Home</button></Link>
+        <button onClick={creationOtherActivity} className='form-button-presentation'>Crear Otra Actividad</button>
+        <Link to={'/home'} className='form-link'><button>Home</button></Link>
       </>
-        : (<form autoComplete='off' onSubmit={hadlerSumit}>
-          <label htmlFor='name'>Nombre</label>
-          <input type='text' id='name' name='name' placeholder='Escribe el nombre de la actividad nueva' value={data["name"]} onChange={hadlerName} className={isNameValid ? 'valid' : 'invalid'} />
+        : (<form autoComplete='off' onSubmit={hadlerSumit} className='form-container'>
+          <h1 className='form-title'>Formulario de Creacion de Actividades</h1>
+          <fieldset>
+            <label htmlFor='name'>Nombre</label>
+            <input type='text' id='name' name='name' placeholder='Escribe el nombre de la actividad nueva' value={data["name"]} onChange={hadlerName} className={(isNameValid ? 'valid form-input' : 'invalid form-input')} />
+          </fieldset>
+          <fieldset>
           <label htmlFor='difficulty'>Dificultad</label>
-          <input id='difficulty' name='difficulty' placeholder='Ingresa la dificultad entre 1.0 y 5' value={data["difficulty"]} onChange={hadlerDifficulty} className={isDifficultyValid ? 'valid' : 'invalid'} />
+          <input id='difficulty' name='difficulty' placeholder='Ingresa la dificultad entre 1.0 y 5' value={data["difficulty"]} onChange={hadlerDifficulty} className={isDifficultyValid ? 'valid form-input' : 'invalid form-input'} />
+          </fieldset>
+          <fieldset>
           <label htmlFor='duration'>Duracion</label>
-          <input id='duration' name='duration' placeholder='Ingresa la duracion en horas' value={data['duration']} onChange={hadlerDuration} className={isDurationValid ? 'valid' : 'invalid'} />
+          <input id='duration' name='duration' placeholder='Ingresa la duracion en horas' value={data['duration']} onChange={hadlerDuration} className={isDurationValid ? 'valid form-input' : 'invalid form-input'} />
+          </fieldset>
           <fieldset>
             <legend>Temporada</legend>
             <Select options={options} nameSelector='Season' functionDispatch={hadlerSeason} />
@@ -126,11 +134,13 @@ function Form() {
             <Select options={continents} functionDispatch={hadlerCountinens} nameSelector='Continentes' />
             <Select options={countries} nameSelector='Paises' functionDispatch={hadlerCountries} />
             <div>
-              {data.countries.length && <ListCountries list={countriesApi.filter(({ id }) => data.countries.includes(id))} hadlerFunction={hadlerCountinensDelete} />}
+              {data.countries.length? <ListCountries list={countriesApi.filter(({ id }) => data.countries.includes(id))} hadlerFunction={hadlerCountinensDelete}/>:"Agrega paises"}
             </div>
           </fieldset>
-          <input type='submit' disabled={!submitButton} />
-          <Link to={'/home'}><button>Cancelar</button></Link>
+          <div>
+            <input type='submit' disabled={!submitButton} />
+            <Link to={'/home'}><button>Cancelar</button></Link>
+          </div>
         </form>)}
     </>
   )

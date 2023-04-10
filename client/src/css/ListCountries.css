@@ -1,0 +1,36 @@
+.container-second{
+  display: flex;
+  align-items: center;
+}
+.listcountries-container {
+  width: 70%;
+  height: auto;
+  margin: 10px auto;
+  display: grid;
+  grid-auto-rows: auto;
+  align-items: center;
+}
+
+.item-container {
+  width: min-content;
+  display: grid;
+  grid-auto-columns: min-content;
+  grid-auto-flow: column;
+  border: 1px solid blue;
+  padding: 5px;
+  margin: 3px;
+  border-radius: 18px 0px;
+}
+.item-title{
+  width: max-content;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: left;
+  padding: 5px;
+  margin-right: 8px;
+}
+.item-button{
+  width: fit-content;
+  padding: 8px;
+  margin: 5px 5px 5px 0px;
+}

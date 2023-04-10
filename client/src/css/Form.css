@@ -1,3 +1,47 @@
-.invalid{
-  border: solid red 1px;
+.form-container {
+  max-width: 70%;
+  display: grid;
+  margin: 10px auto;
+  grid-auto-rows: auto;
+  align-items: center;
+  justify-items: center;
+  border: 3px solid blue;
+  border-radius: 20px;
+}
+
+.form-title {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #333;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #0EA8E8;
+  box-shadow: 0 0 5px #0EA8E8;
+}
+
+.invalid {
+  border: 2px solid red;
+}
+
+.valid {
+  border: 2px solid green;
+}
+.form-button-presentation{
+  display: inline;
+}
+.form-link{
+  display: inline;
 }

@@ -1,0 +1,37 @@
+.creado-container{
+  max-width: 80%;
+  margin: 20px auto;
+  display: grid;
+  grid-auto-rows: auto;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.creado-agregar{
+  color: #333;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  padding: 30px;
+  margin: 40px auto;
+}
+
+.creado-title{
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+}
+
+.creado-subtitle{
+  color: #333;
+  font-size: larger;
+  font-weight: 300;
+  text-align: center;
+  padding: 5px;
+  margin: 10px;
+}

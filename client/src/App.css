@@ -136,7 +136,7 @@ table {
 
 /*hasta aqui esta el reset*/
 
-button {
+button,input[type="submit"] {
 	padding: 10px;
 	border-radius: 5px;
 	border: none;
@@ -146,15 +146,15 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+button:hover,input[type="submit"]:hover {
 	background-color: #0B87B6;
 }
 
-button:focus {
+button:focus, input[type="submit"]:focus {
 	outline: none;
 	box-shadow: 0 0 5px #0EA8E8;
 }
 
-button:active {
+button:active, input[type="submit"]:active {
 	background-color: #096F8E;
 }
