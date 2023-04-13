@@ -3,4 +3,8 @@
   grid-template-columns: repeat(4, minmax(150px, 1fr));
   grid-auto-rows: auto;
   gap: 5px;
+  
+}
+.cards-link{
+  text-decoration: none;
 }

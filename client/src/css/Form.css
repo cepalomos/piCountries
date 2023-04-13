@@ -10,7 +10,7 @@
 }
 
 .form-title {
-  color: #333;
+  color: whitesmoke;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -21,7 +21,7 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 16px;
-  color: #333;
+  color: whitesmoke;
   box-sizing: border-box;
   width: 100%;
 }
@@ -44,4 +44,10 @@
 }
 .form-link{
   display: inline;
+}
+.form-label{
+  color: whitesmoke;
+}
+legend{
+  color: whitesmoke;
 }

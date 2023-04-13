@@ -114,15 +114,15 @@ function Form() {
         : (<form autoComplete='off' onSubmit={hadlerSumit} className='form-container'>
           <h1 className='form-title'>Formulario de Creacion de Actividades</h1>
           <fieldset>
-            <label htmlFor='name'>Nombre</label>
+            <label htmlFor='name' className='form-label'>Nombre</label>
             <input type='text' id='name' name='name' placeholder='Escribe el nombre de la actividad nueva' value={data["name"]} onChange={hadlerName} className={(isNameValid ? 'valid form-input' : 'invalid form-input')} />
           </fieldset>
           <fieldset>
-          <label htmlFor='difficulty'>Dificultad</label>
+          <label htmlFor='difficulty' className='form-label'>Dificultad</label>
           <input id='difficulty' name='difficulty' placeholder='Ingresa la dificultad entre 1.0 y 5' value={data["difficulty"]} onChange={hadlerDifficulty} className={isDifficultyValid ? 'valid form-input' : 'invalid form-input'} />
           </fieldset>
           <fieldset>
-          <label htmlFor='duration'>Duracion</label>
+          <label htmlFor='duration' className='form-label'>Duracion</label>
           <input id='duration' name='duration' placeholder='Ingresa la duracion en horas' value={data['duration']} onChange={hadlerDuration} className={isDurationValid ? 'valid form-input' : 'invalid form-input'} />
           </fieldset>
           <fieldset>

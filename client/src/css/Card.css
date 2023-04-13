@@ -6,18 +6,29 @@
   border: 5px solid;
 }
 .card-container:focus{
-  box-shadow: inset 2px 2px 4px #666;
+  box-shadow: 2px 2px 4px #666;
 }
 .card-title{
-  color: #333;
+  color: whitesmoke;
   font-size: 24px;
   font-weight: bold;
-
+  text-align: center;
 }
 
 .card-flag{
   max-width: 95%;
   height: 200px;
+  justify-self: center;
+}
+
+.card-subtitle{
+  color: whitesmoke;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  margin-top: 4px;
+  justify-self: center;
 }
 
 
