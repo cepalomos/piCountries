@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import '../css/Form.css';
 import { countryContinents, countryCreateReset, getSeason, postActivity } from '../redux/actions';
 import Select from '../Components/Select';
 import ListCountries from '../Components/ListCountries';
@@ -78,7 +77,7 @@ function Form() {
       ...data,
       season: event.target.value
     })
-  }
+  }s
 
   function hadlerCountinens(event) {
     if (event.target.value !== "reset")
